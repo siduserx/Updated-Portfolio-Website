@@ -1,41 +1,34 @@
 import { useState, useEffect } from "react";
-
 import { navLinks } from "../constants";
 
 const NavBar = () => {
-  // track if the user has scrolled down the page
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    // create an event listener for when the user scrolls
     const handleScroll = () => {
-      // check if the user has scrolled down at least 10px
-      // if so, set the state to true
-      const isScrolled = window.scrollY > 10;
-      setScrolled(isScrolled);
+      setScrolled(window.scrollY > 10);
     };
 
-    // add the event listener to the window
     window.addEventListener("scroll", handleScroll);
-
-    // cleanup the event listener when the component is unmounted
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <header className={`navbar ${scrolled ? "scrolled" : "not-scrolled"}`}>
       <div className="inner">
+
+        {/* Logo */}
         <a href="#hero" className="logo">
           Siddhesh Nimodiya
         </a>
 
+        {/* Desktop Nav */}
         <nav className="desktop">
           <ul>
             {navLinks.map(({ link, name, download }) => (
               <li key={name} className="group">
-                <a href={link}
-                download={download ? true : undefined}
-                >
+                <a href={link} download={download ? true : undefined}>
                   <span>{name}</span>
                   <span className="underline" />
                 </a>
@@ -44,14 +37,49 @@ const NavBar = () => {
           </ul>
         </nav>
 
-        <a href="#contact" className="contact-btn group">
-          <div className="inner">
-            <span>Contact me</span>
-          </div>
+        {/* Desktop Contact */}
+        <a href="#contact" className="contact-btn group desktop">
+          <div className="inner"><span>Contact me</span></div>
         </a>
+
+        {/* MOBILE MENU BUTTON (3 dots / hamburger) */}
+        <button
+          className="mobile-menu-btn"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          ☰
+        </button>
+
       </div>
+
+      {/* MOBILE DROPDOWN MENU */}
+      {menuOpen && (
+        <div className="mobile-menu">
+          <ul>
+            {navLinks.map(({ link, name, download }) => (
+              <li key={name}>
+                <a
+                  href={link}
+                  download={download ? true : undefined}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {name}
+                </a>
+              </li>
+            ))}
+
+            {/* MOBILE CONTACT BUTTON */}
+            <li>
+              <a href="#contact" onClick={() => setMenuOpen(false)}>
+                Contact Me
+              </a>
+            </li>
+          </ul>
+        </div>
+      )}
+
     </header>
   );
-}
+};
 
 export default NavBar;
