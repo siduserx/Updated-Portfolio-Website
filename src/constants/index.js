@@ -11,6 +11,11 @@ const navLinks = [
     name: "Skills",
     link: "#skills",
   },
+  {
+  name: "Download Resume",
+  link: "/siddhesh_resume.pdf",
+  download: true,
+  }
 ];
 
 const words = [
