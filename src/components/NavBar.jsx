@@ -31,9 +31,11 @@ const NavBar = () => {
 
         <nav className="desktop">
           <ul>
-            {navLinks.map(({ link, name }) => (
+            {navLinks.map(({ link, name, download }) => (
               <li key={name} className="group">
-                <a href={link}>
+                <a href={link}
+                download={download ? true : undefined}
+                >
                   <span>{name}</span>
                   <span className="underline" />
                 </a>
