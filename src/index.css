@@ -153,6 +153,21 @@ section {
       }
     }
   }
+  .mobile-menu-btn {
+    @apply block lg:hidden text-white text-3xl cursor-pointer bg-transparent border-none;
+  }
+
+  .mobile-menu {
+    @apply lg:hidden w-full bg-black px-6 py-4 mt-3 rounded-lg border border-black-50;
+  }
+
+  .mobile-menu ul {
+    @apply flex flex-col gap-4;
+  }
+
+  .mobile-menu ul li a {
+    @apply text-white-50 text-lg font-medium hover:text-white transition-all;
+  }
 
   .app-showcase {
     @apply w-full mt-20 px-5 md:px-20 py-10 md:py-20 flex items-center justify-center;
